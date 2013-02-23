@@ -1,0 +1,45 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @member.name %>
+</p>
+
+<p>
+  <b>View name:</b>
+  <%= @member.view_name %>
+</p>
+
+<p>
+  <b>Group:</b>
+  <%= @member.group_id %>
+</p>
+
+<p>
+  <b>Color:</b>
+  <%= @member.color_id %>
+</p>
+
+<p>
+  <b>Push flg:</b>
+  <%= @member.push_flg %>
+</p>
+
+<p>
+  <b>Center flg:</b>
+  <%= @member.center_flg %>
+</p>
+
+<p>
+  <b>Graduation flg:</b>
+  <%= @member.graduation_flg %>
+</p>
+
+<p>
+  <b>Deleted:</b>
+  <%= @member.deleted %>
+</p>
+
+
+<%= link_to 'Edit', edit_member_path(@member) %> |
+<%= link_to 'Back', members_path %>
