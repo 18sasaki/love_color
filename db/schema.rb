@@ -18,18 +18,18 @@ ActiveRecord::Schema.define(:version => 20130223155234) do
     t.string   "view_name"
     t.string   "rgb"
     t.integer  "sort"
-    t.integer  "deleted"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.integer  "deleted",    :default => 0
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
   end
 
   create_table "groups", :force => true do |t|
     t.string   "name"
     t.string   "view_name"
     t.integer  "sort"
-    t.integer  "deleted"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.integer  "deleted",    :default => 0
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
   end
 
   create_table "members", :force => true do |t|
@@ -37,12 +37,12 @@ ActiveRecord::Schema.define(:version => 20130223155234) do
     t.string   "view_name"
     t.integer  "group_id"
     t.integer  "color_id"
-    t.integer  "push_flg"
-    t.integer  "center_flg"
-    t.integer  "graduation_flg"
-    t.integer  "deleted"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
+    t.integer  "push_flg",       :default => 0
+    t.integer  "center_flg",     :default => 0
+    t.integer  "graduation_flg", :default => 0
+    t.integer  "deleted",        :default => 0
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
   end
 
 end

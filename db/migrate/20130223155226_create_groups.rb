@@ -4,7 +4,7 @@ class CreateGroups < ActiveRecord::Migration
       t.string :name
       t.string :view_name
       t.integer :sort
-      t.integer :deleted
+      t.integer :deleted, {:default => 0}
 
       t.timestamps
     end

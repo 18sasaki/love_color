@@ -19,29 +19,24 @@
     <%= f.label :view_name %><br />
     <%= f.text_field :view_name %>
   </div>
-  <div class="field">
-    <%= f.label :group_id %><br />
-    <%= f.number_field :group_id %>
-  </div>
+
+  <%= hidden_field 'member', 'group_id', :value => @member.group_id || params[:group_id] %>
+
   <div class="field">
     <%= f.label :color_id %><br />
-    <%= f.number_field :color_id %>
+    <%= f.select 'color_id', options_for_select([[]] + @colors.map{|color| [color.view_name, color.id]}, @member.color_id) %>
   </div>
   <div class="field">
     <%= f.label :push_flg %><br />
-    <%= f.number_field :push_flg %>
+    <%= f.check_box('push_flg', {:cheked => @member.push_flg == 1}, 1, 0) %>
   </div>
   <div class="field">
     <%= f.label :center_flg %><br />
-    <%= f.number_field :center_flg %>
+    <%= f.check_box('center_flg', {:cheked => @member.center_flg == 1}, 1, 0) %>
   </div>
   <div class="field">
     <%= f.label :graduation_flg %><br />
-    <%= f.number_field :graduation_flg %>
-  </div>
-  <div class="field">
-    <%= f.label :deleted %><br />
-    <%= f.number_field :deleted %>
+    <%= f.check_box('graduation_flg', {:cheked => @member.graduation_flg == 1}, 1, 0) %>
   </div>
   <div class="actions">
     <%= f.submit %>

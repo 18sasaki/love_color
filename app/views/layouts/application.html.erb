@@ -8,6 +8,19 @@
 </head>
 <body>
 
+<div class="menu">
+  <table>
+    <tr>
+	    <td>
+	      <b>link</b>
+				  <%= link_to "index", '/' %>
+				  <%= link_to "group", :groups %>
+				  <%= link_to "color", :colors %>
+				  <%= link_to "member", :members %>
+		</td>
+	</tr>
+  </table>
+</div>
 <%= yield %>
 
 </body>

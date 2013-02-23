@@ -25,6 +25,7 @@ class MembersController < ApplicationController
   # GET /members/new.json
   def new
     @member = Member.new
+    @colors = Color.all
 
     respond_to do |format|
       format.html # new.html.erb
@@ -35,6 +36,7 @@ class MembersController < ApplicationController
   # GET /members/1/edit
   def edit
     @member = Member.find(params[:id])
+    @colors = Color.all
   end
 
   # POST /members

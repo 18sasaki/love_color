@@ -1,0 +1,30 @@
+<h1>Love Color</h1>
+
+<%= link_to('group追加', :new_group) %>
+<%= link_to('色追加', :new_color) %>
+
+<table border=1>
+  <tr>
+    <td align='right'>グループ／色</td>
+    <% @colors.each do |color| %>
+      <td bgcolor='<%= color.rgb %>' width=100><%= color.view_name %></td>
+    <% end %>
+  </tr>
+  <% @groups.each do |group| %>
+    <tr>
+      <td>
+        <%= link_to(group.view_name, group_path(group)) %>
+      </td>
+      <% @colors.each do |color| %>
+        <td>
+          <% if member = @members[group.id][color.id] %>
+            <%= link_to(member.name, member_path(member.id)) %><br>
+            <%= member.view_name %><br>
+            <%= member.push_flg %>, <%= member.center_flg %>, <%= member.graduation_flg %>
+          <% end %>
+        </td>
+      <% end %>
+    </tr>
+  <% end %>
+</table>
+

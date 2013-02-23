@@ -1,5 +1,7 @@
 LoveColor::Application.routes.draw do
-  resources :members
+#  resources :members
+  resources :members, :except => ['new']
+  match 'members/new/:group_id' => 'members#new', :as => 'new_member'
 
 
   resources :colors
@@ -7,6 +9,11 @@ LoveColor::Application.routes.draw do
 
   resources :groups
 
+
+
+
+
+  root :to => 'index#index'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
