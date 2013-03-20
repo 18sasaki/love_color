@@ -2,7 +2,7 @@ class GroupsController < ApplicationController
   # GET /groups
   # GET /groups.json
   def index
-    @groups = Group.all
+    @groups = Group.find(:all, :order => 'sort', :conditions => 'deleted = 0')
 
     respond_to do |format|
       format.html # index.html.erb
@@ -14,6 +14,7 @@ class GroupsController < ApplicationController
   # GET /groups/1.json
   def show
     @group = Group.find(params[:id])
+    @members = Member.find(:all, :conditions => ["group_id = ? and deleted = 0", params[:id]])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -41,10 +42,13 @@ class GroupsController < ApplicationController
   # POST /groups.json
   def create
     @group = Group.new(params[:group])
+    new_sort = Configurations.get_sort('group')
+    @group.sort = new_sort
+    @group.deleted = 0
 
     respond_to do |format|
       if @group.save
-        format.html { redirect_to @group, notice: 'Group was successfully created.' }
+        format.html { redirect_to :groups, notice: 'Group was successfully created.' }
         format.json { render json: @group, status: :created, location: @group }
       else
         format.html { render action: "new" }
@@ -60,7 +64,7 @@ class GroupsController < ApplicationController
 
     respond_to do |format|
       if @group.update_attributes(params[:group])
-        format.html { redirect_to @group, notice: 'Group was successfully updated.' }
+        format.html { redirect_to params[:back_to], notice: 'Group was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -79,5 +83,27 @@ class GroupsController < ApplicationController
       format.html { redirect_to groups_url }
       format.json { head :no_content }
     end
+  end
+
+  def sort_change
+    target_group = Group.find(params[:id])
+    sort_num = target_group.sort
+
+    case params[:s]
+    when 'up'
+      after_sort_num = sort_num - 1
+    when 'down'
+      after_sort_num = sort_num + 1
+    end
+
+    if change_grpup = Group.find(:first, :conditions => {:sort => after_sort_num})
+      change_grpup.sort = sort_num
+      change_grpup.save!
+
+      target_group.sort = after_sort_num
+      target_group.save!
+    end
+
+    redirect_to :groups
   end
 end

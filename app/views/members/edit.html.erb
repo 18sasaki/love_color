@@ -1,6 +1,6 @@
-<h1>Editing member</h1>
+<h1>メンバー編集（<%= @member.name %>）</h1>
 
 <%= render 'form' %>
 
 <%= link_to 'Show', @member %> |
-<%= link_to 'Back', members_path %>
+<%= link_to 'Back', params[:back_to] %>

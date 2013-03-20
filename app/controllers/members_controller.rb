@@ -2,7 +2,7 @@ class MembersController < ApplicationController
   # GET /members
   # GET /members.json
   def index
-    @members = Member.all
+    @members = Member.find(:all, :conditions => 'deleted = 0')
 
     respond_to do |format|
       format.html # index.html.erb
@@ -25,7 +25,8 @@ class MembersController < ApplicationController
   # GET /members/new.json
   def new
     @member = Member.new
-    @colors = Color.all
+    @group = Group.find(params[:group_id])
+    @colors = Color.find(:all, :conditions => 'deleted = 0')
 
     respond_to do |format|
       format.html # new.html.erb
@@ -36,18 +37,20 @@ class MembersController < ApplicationController
   # GET /members/1/edit
   def edit
     @member = Member.find(params[:id])
-    @colors = Color.all
+    @group = @member.group
+    @colors = Color.find(:all, :conditions => 'deleted = 0')
   end
 
   # POST /members
   # POST /members.json
   def create
     @member = Member.new(params[:member])
+    @member.deleted = 0
 
     respond_to do |format|
       if @member.save
-        format.html { redirect_to @member, notice: 'Member was successfully created.' }
-        format.json { render json: @member, status: :created, location: @member }
+        format.html { redirect_to group_path(@member.group_id), notice: 'Member was successfully created.' }
+#        format.json { render json: @member, status: :created, location: @member }
       else
         format.html { render action: "new" }
         format.json { render json: @member.errors, status: :unprocessable_entity }
@@ -62,8 +65,9 @@ class MembersController < ApplicationController
 
     respond_to do |format|
       if @member.update_attributes(params[:member])
-        format.html { redirect_to @member, notice: 'Member was successfully updated.' }
-        format.json { head :no_content }
+p ">>>>>>>>>>>>>>>>>>#{params[:back_to]}"
+        format.html { redirect_to params[:back_to], notice: 'Member was successfully updated.' }
+#        format.json { head :no_content }
       else
         format.html { render action: "edit" }
         format.json { render json: @member.errors, status: :unprocessable_entity }

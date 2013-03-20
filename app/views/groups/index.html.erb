@@ -1,25 +1,24 @@
-<h1>Listing groups</h1>
+<h1>groups</h1>
 
-<table>
+<table border=1>
   <tr>
     <th>Name</th>
     <th>View name</th>
     <th>Sort</th>
-    <th>Deleted</th>
-    <th></th>
     <th></th>
     <th></th>
   </tr>
 
 <% @groups.each do |group| %>
   <tr>
-    <td><%= group.name %></td>
+    <td><%= link_to group.name, group %></td>
     <td><%= group.view_name %></td>
-    <td><%= group.sort %></td>
-    <td><%= group.deleted %></td>
-    <td><%= link_to 'Show', group %></td>
+    <td>
+      <%= link_to '▲', groups_sort_change_path({:id => group.id, :s => 'up'}) %>
+      <%= link_to '▼', groups_sort_change_path({:id => group.id, :s => 'down'}) %>
+    </td>
+    <td><%= link_to '追加', new_member_path(group) %></td>
     <td><%= link_to 'Edit', edit_group_path(group) %></td>
-    <td><%= link_to 'Destroy', group, method: :delete, data: { confirm: 'Are you sure?' } %></td>
   </tr>
 <% end %>
 </table>
@@ -27,3 +26,4 @@
 <br />
 
 <%= link_to 'New Group', new_group_path %>
+

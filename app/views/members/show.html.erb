@@ -1,45 +1,39 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <b>Name:</b>
-  <%= @member.name %>
-</p>
-
-<p>
-  <b>View name:</b>
-  <%= @member.view_name %>
-</p>
-
-<p>
-  <b>Group:</b>
-  <%= @member.group_id %>
-</p>
-
-<p>
-  <b>Color:</b>
-  <%= @member.color_id %>
-</p>
-
-<p>
-  <b>Push flg:</b>
-  <%= @member.push_flg %>
-</p>
-
-<p>
-  <b>Center flg:</b>
-  <%= @member.center_flg %>
-</p>
-
-<p>
-  <b>Graduation flg:</b>
-  <%= @member.graduation_flg %>
-</p>
-
-<p>
-  <b>Deleted:</b>
-  <%= @member.deleted %>
-</p>
 
 
-<%= link_to 'Edit', edit_member_path(@member) %> |
-<%= link_to 'Back', members_path %>
+<div class='main'>
+  <table border=1 font-size='20px'>
+    <tr>
+      <td colspan=2>
+        <h1>
+          <%= link_to(@member.name, "http://ja.wikipedia.org/wiki/#{@member.wiki}", {:target => 'blank'}) %>
+          <%= '(推)' if @member.push_flg == 1 %>
+          <%= '(中)' if @member.center_flg == 1 %>
+          <%= '(卒)' if @member.graduation_flg == 1 %>
+        </h1>
+      </td>
+    </tr>
+    <tr><td colspan=2 class='content'><%= @member.view_name %></td></tr>
+    <tr>
+      <td class='content'><%= link_to(@member.group.view_name, group_path(@member.group)) %></td>
+      <td class='content' bgcolor="<%= @member.color.rgb %>"><%= @member.color.view_name %>担当</td>
+    </tr>
+    <tr><td class='content' colspan=2><%= link_to('twitter', "https://twitter.com/#{@member.twitter}", {:target => 'blank'}) %></td></tr>
+    <tr><td class='content' colspan=2>blog : <%= link_to(@member.blog_name, @member.blog_url, {:target => 'blank'}) %></td></tr>
+  </table>
+  <br>
+  <div align='center'>
+    <%= link_to 'Edit', edit_member_path(@member) %> |
+    <%= link_to 'Back', members_path %>
+  </div>
+</div>
+<div class='tweet'>
+  <a class="twitter-timeline" data-dnt="true" href="https://twitter.com/FurukawaMirin" data-widget-id="312585270451113984">@FurukawaMirin からのツイート</a>
+  <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+</div>
+
+
+
+
+

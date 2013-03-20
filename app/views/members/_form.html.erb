@@ -20,12 +20,31 @@
     <%= f.text_field :view_name %>
   </div>
 
-  <%= hidden_field 'member', 'group_id', :value => @member.group_id || params[:group_id] %>
+  <%= hidden_field 'member', 'group_id', :value => @group.id %>
+  <%= hidden_field_tag 'back_to', params[:back_to] %>
 
   <div class="field">
     <%= f.label :color_id %><br />
     <%= f.select 'color_id', options_for_select([[]] + @colors.map{|color| [color.view_name, color.id]}, @member.color_id) %>
   </div>
+
+  <div class="field">
+    <%= f.label :wiki %><br />
+    http://ja.wikipedia.org/wiki/<%= f.text_field :wiki %>
+  </div>
+  <div class="field">
+    <%= f.label :twitter %><br />
+    https://twitter.com/<%= f.text_field :twitter %>
+  </div>
+  <div class="field">
+    <%= f.label :blog_url %><br />
+    <%= f.text_field :blog_url %>
+  </div>
+  <div class="field">
+    <%= f.label :blog_name %><br />
+    <%= f.text_field :blog_name %>
+  </div>
+
   <div class="field">
     <%= f.label :push_flg %><br />
     <%= f.check_box('push_flg', {:cheked => @member.push_flg == 1}, 1, 0) %>

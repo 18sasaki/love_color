@@ -5,15 +5,27 @@
 
 <table border=1>
   <tr>
-    <td align='right'>グループ／色</td>
+    <!-- <td align='right' colspan=2>グループ／色</td> -->
+    <td align='center' colspan=2>
+      <%= link_to('▼', root_path(:c => params[:c])) %>　
+      <%= link_to('◯', :root) %>　
+      <%= link_to('▶', root_path(:g => params[:g])) %>
+    </td>
+    <!-- <td><%= link_to('▶', root_path(:g => params[:g])) %></td> -->
     <% @colors.each do |color| %>
-      <td bgcolor='<%= color.rgb %>' width=100><%= color.view_name %></td>
+      <td bgcolor='<%= color.rgb %>' width=110 align='center'>
+        <%= link_to(color.name_disp, color_path(color)) %><br>
+        <%= link_to('▼', root_path(:c => color.id, :g => params[:g])) %>
+      </td>
     <% end %>
   </tr>
   <% @groups.each do |group| %>
     <tr>
       <td>
-        <%= link_to(group.view_name, group_path(group)) %>
+        <%= link_to(group.name_disp, group_path(group)) %>
+      </td>
+      <td>
+        <%= link_to('▶', root_path(:g => group.id, :c => params[:c])) %>
       </td>
       <% @colors.each do |color| %>
         <td>

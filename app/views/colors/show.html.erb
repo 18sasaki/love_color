@@ -15,16 +15,23 @@
   <%= @color.rgb %>
 </p>
 
-<p>
-  <b>Sort:</b>
-  <%= @color.sort %>
-</p>
+<table border=1>
+  <tr bgcolor='<%= @color.rgb %>'>
+    <th>Name</th>
+    <th>View name</th>
+    <th>Group</th>
+    <th></th>
+  </tr>
 
-<p>
-  <b>Deleted:</b>
-  <%= @color.deleted %>
-</p>
-
+<% @members.each do |member| %>
+  <tr>
+    <td><%= link_to member.name, member %></td>
+    <td><%= member.view_name %></td>
+    <td><%= member.group.view_name %></td>
+    <td><%= link_to 'Edit', edit_member_path(member, :back_to => request.env['REQUEST_URI']) %></td>
+  </tr>
+<% end %>
+</table>
 
 <%= link_to 'Edit', edit_color_path(@color) %> |
 <%= link_to 'Back', colors_path %>

@@ -11,13 +11,22 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130223155234) do
+ActiveRecord::Schema.define(:version => 20130317055342) do
 
   create_table "colors", :force => true do |t|
     t.string   "name"
     t.string   "view_name"
     t.string   "rgb"
     t.integer  "sort"
+    t.integer  "deleted",    :default => 0
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
+  end
+
+  create_table "configurations", :force => true do |t|
+    t.string   "key"
+    t.string   "value1"
+    t.string   "value2"
     t.integer  "deleted",    :default => 0
     t.datetime "created_at",                :null => false
     t.datetime "updated_at",                :null => false
@@ -43,6 +52,10 @@ ActiveRecord::Schema.define(:version => 20130223155234) do
     t.integer  "deleted",        :default => 0
     t.datetime "created_at",                    :null => false
     t.datetime "updated_at",                    :null => false
+    t.string   "wiki"
+    t.string   "twitter"
+    t.string   "blog_url"
+    t.string   "blog_name"
   end
 
 end

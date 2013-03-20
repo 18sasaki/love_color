@@ -1,27 +1,24 @@
-<h1>Listing colors</h1>
+<h1>colors</h1>
 
-<table>
+<table border=1>
   <tr>
     <th>Name</th>
     <th>View name</th>
-    <th>Rgb</th>
+    <th>RGB</th>
     <th>Sort</th>
-    <th>Deleted</th>
-    <th></th>
-    <th></th>
     <th></th>
   </tr>
 
 <% @colors.each do |color| %>
   <tr>
-    <td><%= color.name %></td>
-    <td><%= color.view_name %></td>
-    <td><%= color.rgb %></td>
-    <td><%= color.sort %></td>
-    <td><%= color.deleted %></td>
-    <td><%= link_to 'Show', color %></td>
+    <td bgcolor="<%= color.rgb %>"><%= link_to color.name, color %></td>
+    <td bgcolor="<%= color.rgb %>"><%= color.view_name %></td>
+    <td bgcolor="<%= color.rgb %>"><%= color.rgb %></td>
+    <td>
+      <%= link_to '▲', colors_sort_change_path({:id => color.id, :s => 'up'}) %>
+      <%= link_to '▼', colors_sort_change_path({:id => color.id, :s => 'down'}) %>
+    </td>
     <td><%= link_to 'Edit', edit_color_path(color) %></td>
-    <td><%= link_to 'Destroy', color, method: :delete, data: { confirm: 'Are you sure?' } %></td>
   </tr>
 <% end %>
 </table>

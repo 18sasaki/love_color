@@ -10,10 +10,22 @@
   <%= @group.view_name %>
 </p>
 
-<p>
-  <b>Sort:</b>
-  <%= @group.sort %>
-</p>
+<table border=1>
+  <tr>
+    <th>Name</th>
+    <th>View name</th>
+    <th></th>
+  </tr>
+
+<% @members.each do |member| %>
+  <tr bgcolor='<%= member.color.rgb %>'>
+    <td><%= link_to member.name, member %></td>
+    <td><%= member.view_name %></td>
+    <td><%= link_to 'Edit', edit_member_path(member, :back_to => request.env['REQUEST_URI']) %></td>
+  </tr>
+<% end %>
+</table>
+
 
 <%= link_to 'member作成', new_member_path(@group) %><br>
 <br>
