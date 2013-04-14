@@ -1,16 +1,16 @@
 LoveColor::Application.routes.draw do
 #  resources :members
   resources :members, :except => ['new', 'destroy']
-  match 'members/new/:group_id' => 'members#new', :as => 'new_member'
+    get 'members/new/:group_id' => 'members#new', :as => 'new_member'
 
 
   resources :colors, :except => ['destroy']
-    match
-    match 'colors/sort_change/:id' => 'colors#sort_change', :as => 'colors_sort_change'
+#    delete 'colors/:id' => 'colors#delete'
+    get 'colors/sort_change/:id' => 'colors#sort_change', :as => 'colors_sort_change'
 
 
   resources :groups, :except => ['destroy']
-    match 'groups/sort_change/:id' => 'groups#sort_change', :as => 'groups_sort_change'
+    get 'groups/sort_change/:id' => 'groups#sort_change', :as => 'groups_sort_change'
 
 
 
